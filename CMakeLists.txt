@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(ConsoleRPG main.cpp
         Character/Character.h
-        Character/Player.cpp
-        Character/Player.h
-        Character/Ennemy/Enemy.h)
+        Character/Player/Player.cpp
+        Character/Player/Player.h
+        Character/Ennemy/Enemy.h
+        EnemyWaves/EnemyWave.cpp
+        EnemyWaves/EnemyWave.h)
