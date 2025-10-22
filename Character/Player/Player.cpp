@@ -8,7 +8,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "../Ennemy/Enemy.h"
+#include "../Enemy/Enemy.h"
 
 Player::Player(const std::string &name):
     Character(name, 1, 10, 1, 0), _exp(0)
@@ -16,12 +16,12 @@ Player::Player(const std::string &name):
     _nextLevelExp = GetNextLevelExp();
 }
 
-void Player::Display()
+void Player::Display() const
 {
-    std::cout << "___ " << Name << " Lv. " << _level << " ___\n" <<
-        "\tHP → " << _hp << " /" << _maxHp << "\n" <<
-        "\tStrength → " << _strength << "\n" <<
-        "\tDefense → " << _defense << "\n" <<
+    std::cout << "___ " << Name << " Lv. " << _level << " ___" <<
+        "\tHP \u2192 " << _hp << " /" << _maxHp << "\n" <<
+        "\tStrength \u2192 " << _strength << "\n" <<
+        "\tDefense \u2192 " << _defense << "\n" <<
     "Next level in " << _nextLevelExp - _exp << " exp points\n\n";
 }
 
@@ -32,9 +32,15 @@ void Player::TakeDamage(const int damage)
     _hp -= std::clamp(damage, 0, damage - _defense);
 
     std::cout << "Ouch! You have taken " << oldHp - _hp << " damage(s) (reduced by " << _defense << ")\n\n";
+
+    if (_hp <= 0)
+    {
+        std::cout << "You have been defeated...\n";
+        // TODO: GameOver
+    }
 }
 
-void Player::Attack(Character &target)
+void Player::Attack(Character &target) const
 {
     target.TakeDamage(_strength);
     std::cout << "Attack → " << target.Name << std::endl <<
@@ -68,12 +74,12 @@ void Player::LevelUp()
               "\t\t\\3. Defense\n";
     std::cin >> choice;
 
-    while (choice < 0 || choice > 3)
+    while (choice < 1 || choice > 3)
     {
         std::cout << "Invalid choice, choose your next attribute to improve:\n" <<
-              "\t\t\\1. Max HP    ↑\n" <<
-              "\t\t\\2. Strength  ↑\n" <<
-              "\t\t\\3. Defense   ↑\n";
+              "\t\t\\1. Max HP    \u2191\n" <<
+              "\t\t\\2. Strength  \u2191\n" <<
+              "\t\t\\3. Defense   \u2191\n";
         std::cin >> choice;
     }
 
@@ -81,16 +87,16 @@ void Player::LevelUp()
         case 1:
             _maxHp += 2;
             _hp = _maxHp;
-            std::cout << "Max HP increased: " << _strength - 2 << " → " << _strength << "\n" <<
-                "\t→ HP fully restored.\n\n";
+            std::cout << "Max HP increased: " << _strength - 2 << " \u2192 " << _strength << "\n" <<
+                "\t> HP fully restored.\n\n";
             break;
         case 2:
             _strength++;
-            std::cout << "Strength increased: " << _strength - 1 << " → " << _strength << "\n\n";
+            std::cout << "Strength increased: " << _strength - 1 << " \u2192 " << _strength << "\n\n";
             break;
         case 3:
             _defense++;
-            std::cout << "Defense increased: " << _defense - 1 << " → " << _defense << "\n\n";
+            std::cout << "Defense increased: " << _defense - 1 << " \u2192 " << _defense << "\n\n";
             break;
         default:
             throw std::invalid_argument("Player::LevelUp() - Unexpected choiceIndex caught");

@@ -1,23 +1,50 @@
-﻿//
-// Created by Charlie on 22/10/2025.
-//
-
-#pragma once
+﻿#pragma once
 
 #include <memory>
 #include <queue>
 
-#include "../Character/Ennemy/Enemy.h"
+#include "../Character/Player/Player.h"
+#include "../Character/Enemy/Enemy.h"
 
+template<typename T>
 class EnemyWave
 {
 public:
-    EnemyWave();
-    ~EnemyWave();
+;    ~EnemyWave() = default;
 
-    std::unique_ptr<Enemy> GetNextEnemy();
+    bool GetNextEnemy() {
+        _enemyIndex++;
 
-    std::queue<std::unique_ptr<Enemy>> _waveList;
+        if (_waveList.empty())
+        {
+            OnEmptyWave();
+            return false;
+        }
+
+        CurrentEnemy = _waveList[_enemyIndex];
+        return true;
+    }
+    bool GroupAttack(const Player& player) const {
+        if (_waveList.empty())
+            throw std::logic_error("EnemyWave::GroupAttack(): shouldn't be called if wave is empty.");
+
+        for (const T& enemy : _waveList)
+        {
+            enemy.Attack(player);
+        }
+
+        return true;
+    }
+
+    std::shared_ptr<Enemy> CurrentEnemy;
+
+private:
+    void OnEmptyWave() const {
+        // TODO
+    }
+
+    std::vector<std::shared_ptr<T>> _waveList;
+    int _enemyIndex = 0;
 
     // Illegal → standard container can't store references
     //         → a container of references can't be allocated dynamically.

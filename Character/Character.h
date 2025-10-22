@@ -5,21 +5,22 @@
 #pragma once
 
 #include <string>
-#include <utility>
 
 class Character
 {
 public:
-    virtual void Display() = 0;
+    virtual void Display() const = 0;
     virtual void TakeDamage(int damage) = 0;
-    virtual void Attack(Character &target) = 0;
+    virtual void Attack(Character &target) const  = 0;
+
+    bool IsAlive() const { return _hp > 0; }
 
     std::string Name;
 
 protected:
-    Character(std::string name, const int level, const int baseHP, const int baseStrength, const int baseDefense)
+    Character(const std::string &name, const int level, const int baseHP, const int baseStrength, const int baseDefense)
     {
-        Name = std::move(name);
+        Name = name;
         _level = level;
         _maxHp = baseHP;
         _hp = _maxHp;

@@ -1,10 +1,16 @@
-﻿#include <iostream>
+﻿#include "GameManager.h"
 
 int main()
 {
-    std::string playerName;
+    GameManager manager {2};
 
-    std::cin >> playerName;
+    manager.StartGame();
+
+    while (manager.Player->IsAlive())
+    {
+        manager.PlayerTurn();
+        // TODO: enemy choice
+    }
 
     return 0;
 }

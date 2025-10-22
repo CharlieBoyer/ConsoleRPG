@@ -15,9 +15,10 @@ public:
     explicit Player(const std::string &name);
     ~Player() override = default;
 
-    void Display() override;
+    void Display() const override;
+
     void TakeDamage(int damage) override;
-    void Attack(Character &target) override;
+    void Attack(Character &target) const override;
 
     void GainEXP(int exp);
     void LevelUp();
