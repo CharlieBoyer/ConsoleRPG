@@ -47,6 +47,10 @@ void GameManager::StartGame()
 	// 		"\t1. Health Potion (recovers all your HPs)\n" <<
 	// 		"\t2. Iron Sword (+2 Strength)\n" <<
 	// 		"\t3. Wooden Shield (+2 Defense)\n\n";
+
+	std::cout << "Behold your first encounter:\n\n";
+
+	CurrentWave->Status();
 }
 
 void GameManager::PlayerTurn() const

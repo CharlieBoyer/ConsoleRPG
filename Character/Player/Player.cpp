@@ -18,10 +18,10 @@ Player::Player(const std::string &name):
 
 void Player::Display() const
 {
-    std::cout << "___ " << Name << " Lv. " << _level << " ___" <<
-        "\tHP \u2192 " << _hp << " /" << _maxHp << "\n" <<
-        "\tStrength \u2192 " << _strength << "\n" <<
-        "\tDefense \u2192 " << _defense << "\n" <<
+    std::cout << "___ " << Name << " Lv. " << _level << " ___\n" <<
+        "    HP       \u2192 " << _hp << " /" << _maxHp << "\n" <<
+        "    Strength \u2192 " << _strength << "\n" <<
+        "    Defense  \u2192 " << _defense << "\n" <<
     "Next level in " << _nextLevelExp - _exp << " exp points\n\n";
 }
 

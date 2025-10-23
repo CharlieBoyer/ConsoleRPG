@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <iostream>
 #include <memory>
 #include <queue>
 
@@ -10,8 +11,19 @@ template<typename T>
 class EnemyWave
 {
 public:
+    EnemyWave() = default;
 ;    ~EnemyWave() = default;
 
+    void Status() const
+    {
+        std::cout << "DEBUG _enemyIndex address: " << &_enemyIndex << std::endl;
+        std::cout << "___ Wave [" << (_enemyIndex + 1) << "]" << "___\n";
+
+        for (const std::shared_ptr<T>& enemyPtr : _waveList)
+        {
+            enemyPtr->Display();
+        }
+    }
     bool GetNextEnemy() {
         _enemyIndex++;
 
@@ -34,6 +46,11 @@ public:
         }
 
         return true;
+    }
+
+    void AddEnemyToWave(const T& enemy)
+    {
+        _waveList.push_back(enemy);
     }
 
     std::shared_ptr<Enemy> CurrentEnemy;

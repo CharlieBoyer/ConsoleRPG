@@ -5,10 +5,15 @@
 #include "Enemy.h"
 
 #include <algorithm>
+#include <iostream>
 
 #include "../Player/Player.h"
 
-void Enemy::Display() const {}
+void Enemy::Display() const
+{
+    std::cout << "\t" << Name << " Lv. " << _level << " " <<
+    "\t\tHP \u2192 " << _hp << " /" << _maxHp << "\n";
+}
 
 void Enemy::TakeDamage(const int damage)
 {
