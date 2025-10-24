@@ -3,14 +3,18 @@ project(ConsoleRPG)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(ConsoleRPG main.cpp
-        Character/Character.h
-        Character/Player/Player.cpp
-        Character/Player/Player.h
-        Character/Enemy/Enemy.cpp
-        Character/Enemy/Enemy.h
-        EnemyWaves/EnemyWave.h
-        GameManager.cpp
-        GameManager.h
-        Items/Item.cpp
-        Items/Item.h)
+add_executable(ConsoleRPG Source/main.cpp
+        Source/Character/Character.h
+        Source/Character/Player.cpp
+        Source/Character/Player.h
+        Source/Character/Enemy.cpp
+        Source/Character/Enemy.h
+        Source/Character/Slime.h
+        Source/Character/Goblin.h
+        Source/GameManager.cpp
+        Source/GameManager.h
+        Source/EnemyWave.tpp
+        Source/EnemyWave.h
+        Source/Character/Goblin.cpp
+        Source/Character/Slime.cpp
+        Source/IWave.h)
